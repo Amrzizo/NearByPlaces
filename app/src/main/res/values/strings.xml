@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">NearByPlaces</string>
+
+    <string name="str_setting_real_time">RealTime</string>
+    <string name="str_setting_single_update">Single Update</string>
+    <string name="dots">dots</string>
 </resources>

@@ -17,7 +17,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
+
+
+def supportVersion = '27.1.1'
+def retrofitVersion = '2.3.0'
+def rxJavaVersion = '2.0.1'
+def lifeCycleVersion = '1.1.1'
+def roomVersion = '1.1.0-alpha3'
+def butterKnifeVersion = '10.0.0'
+def daggerVersion = '2.21'
+def paging_version = "1.0.1"
+def mockitoVersion = '2.19.0'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -27,6 +43,45 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    // forsquare dependancy
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    // forsquare dependency
     implementation 'com.foursquare:foursquare-android-oauth:1.0.3'
+
+    // Retrofit dependency
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    // Retrofit interceptor
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+
+    // Rx dependency
+    implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+
+    //  ButterNife dependency
+    implementation "com.jakewharton:butterknife:$butterKnifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
+
+    // dagger dependency
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    // lifeCycle dependency
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
+
+    // paging dependency
+    implementation "android.arch.paging:runtime:$paging_version"
+
+    //fused location
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+
+
 }
