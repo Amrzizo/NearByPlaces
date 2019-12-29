@@ -29,7 +29,7 @@ public class ApplicationModule {
 
 
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
 
@@ -43,8 +43,8 @@ public class ApplicationModule {
             HttpUrl originalHttpUrl = request.url();
 
             HttpUrl url = originalHttpUrl.newBuilder()
-                    .addQueryParameter("CLIENT_ID", FoursquareApiService.CLIENT_ID)
-                    .addQueryParameter("CLIENT_SECRET", FoursquareApiService.CLIENT_SECRET)
+                    .addQueryParameter("client_id", FoursquareApiService.CLIENT_ID)
+                    .addQueryParameter("client_secret", FoursquareApiService.CLIENT_SECRET)
                     .build();
 
             Request.Builder builder = request.newBuilder()

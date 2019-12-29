@@ -11,7 +11,8 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codes.amr.nearbyplaces.R;
-import com.codes.amr.nearbyplaces.data.model.VenueModel.Venue;
+import com.codes.amr.nearbyplaces.data.model.ItemsItem;
+import com.codes.amr.nearbyplaces.data.model.Venue;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,7 +23,8 @@ import butterknife.ButterKnife;
 
 
 public class VenueAdapter extends RecyclerView.Adapter<VenueAdapter.venueViewHolder> {
-    private List<Venue> venueList;
+    private static String IMAGE_SIZE="64";
+    private List<ItemsItem> venueList;
     private Context context;
 
     public VenueAdapter(VenueListViewModel viewModel, LifecycleOwner lifecycleOwner) {
@@ -39,21 +41,15 @@ public class VenueAdapter extends RecyclerView.Adapter<VenueAdapter.venueViewHol
 
     @Override
     public venueViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.venue_item_row, parent, false);
         return new venueViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(venueViewHolder holder, int position) {
-        Venue venue = venueList.get(position);
-        holder.venueName.setText(venue.getName());
-        if (venue.getLocation().getAddress() != null)
-            holder.venueAddress.setText(venue.getLocation().getAddress());
-        else
-//            holder.description.setText(R.string.no_des);
 
-            Picasso.with(context).load(venue.getImgUrl()).into(holder.venueImage);
-
+        holder.bind(venueList.get(position).getVenue());
 
     }
 
@@ -62,11 +58,7 @@ public class VenueAdapter extends RecyclerView.Adapter<VenueAdapter.venueViewHol
         return venueList.size();
     }
 
-    public void updateList(List<Venue> venues) {
-        venueList.clear();
-        venueList.addAll(venues);
-        notifyDataSetChanged();
-    }
+
 
     public class venueViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.venue_img)
@@ -75,10 +67,25 @@ public class VenueAdapter extends RecyclerView.Adapter<VenueAdapter.venueViewHol
         TextView venueName;
         @BindView(R.id.venue_address)
         TextView venueAddress;
+        private Venue venue;
 
         public venueViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+        }
+
+        void bind( Venue venue) {
+            this.venue = venue;
+
+            venueName.setText(venue.getName());
+            if (venue.getLocation().getAddress() != null)
+                venueAddress.setText(venue.getLocation().getFormattedAddressString());
+            else
+                venueAddress.setText("no address");
+
+
+                Picasso.with(context).load(venue.getCategories().get(0).getIcon().getPrefix().concat(IMAGE_SIZE).concat(venue.getCategories().get(0).getIcon().getSuffix())).into(venueImage);
         }
     }
 }

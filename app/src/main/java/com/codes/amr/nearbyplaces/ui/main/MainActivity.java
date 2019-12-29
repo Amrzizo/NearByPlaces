@@ -5,6 +5,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+
 import com.codes.amr.nearbyplaces.R;
 import com.codes.amr.nearbyplaces.base.BaseActivity;
 import com.codes.amr.nearbyplaces.ui.venuelist.VenueListFragment;
@@ -38,4 +40,16 @@ public class MainActivity extends BaseActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        venueListFragment.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        venueListFragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 }

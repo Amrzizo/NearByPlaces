@@ -8,6 +8,7 @@ import com.codes.amr.nearbyplaces.data.model.VenueModel.VenueResponse;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public class FoursquareRepository {
 
@@ -17,17 +18,15 @@ public class FoursquareRepository {
     public FoursquareRepository(FoursquareApiService foursquareApiService) {
         this.foursquareApiService = foursquareApiService;
     }
-
-    public Observable<retrofit2.Response<Response>> getNearLocations(String sortBy, int page, String apiKey) {
+    public Single<Response> getNearLocations(String sortBy, int page, String apiKey) {
         return foursquareApiService.getLocations(sortBy, page, apiKey);
     }
-
-    public Observable<retrofit2.Response<ImageResponse>> getPhotos(String id, int limit, String versionDate) {
-        return foursquareApiService.getPhotos(id, limit, versionDate);
-    }
-
-    public Observable<retrofit2.Response<VenueResponse>> getVenue(String id, String versionDate) {
-        return foursquareApiService.getVenue(id, versionDate);
-    }
+//    public   Observable<retrofit2.Response<ImageResponse>>  getPhotos(String id, int limit, String versionDate) {
+//        return foursquareApiService.getPhotos(id, limit, versionDate);
+//    }
+//
+//    public   Observable<retrofit2.Response<VenueResponse>>  getVenue(String id, String versionDate) {
+//        return foursquareApiService.getVenue(id, versionDate);
+//    }
 
 }

@@ -71,10 +71,11 @@ public class Location{
 		return formattedAddress;
 	}
 	public String getFormattedAddressString(){
-		String address = null;
+		String address = "";
 		if(formattedAddress.size()>0){
 			for (String addressLine:formattedAddress) {
-				address = address+" "+addressLine;
+				if(addressLine != null)
+				address = address+addressLine+" ";
 
 			}
 		}
